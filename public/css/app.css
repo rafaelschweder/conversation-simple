@@ -15,6 +15,20 @@ div {
   line-height: 1.25rem;
 }
 
+/* Style for buttons included in the conversation */
+button {
+	background-color: #9855D4;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+	margin-top: 8px;
+	margin-left: 25px;
+}
+
 #view-change-button {
   display: inline-block;
   position: absolute;
