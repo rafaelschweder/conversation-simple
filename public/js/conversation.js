@@ -161,6 +161,26 @@ var ConversationPanel = (function() {
     }
     var messageArray = [];
 
+	/*
+	var buttonArray = isUser ? newPayload.input.text : newPayload.output.options;
+	if (Object.prototype.toString.call( buttonArray ) !== '[object Array]') {
+      buttonArray = [buttonArray];
+    }
+	
+	var buttons;
+	buttonArray.forEach(function(currentText) {
+		if (currentText) {
+			if ("undefined" === typeof buttons)
+				buttons = '<br><button onclick=\"botao(\'' + currentText + '\')\">' + currentText + '</button>'
+			else
+				buttons += '<br><button onclick=\"botao(\'' + currentText + '\')\">' + currentText + '</button>'
+		}
+	});
+
+	if ((isUser) || "undefined" === typeof buttons) {
+		buttons = ''
+	}*/
+
     textArray.forEach(function(currentText) {
       if (currentText) {
         var messageJson = {
@@ -178,7 +198,7 @@ var ConversationPanel = (function() {
               'children': [{
                 // <p>{messageText}</p>
                 'tagName': 'p',
-                'text': currentText
+                'text': currentText //+ buttons
               }]
             }]
           }]
@@ -186,6 +206,40 @@ var ConversationPanel = (function() {
         messageArray.push(Common.buildDomElement(messageJson));
       }
     });
+
+	// Inclusão de código para criação de botões à partir da lista de "options" passados no "output" do JSON
+	if (!isUser) {
+		var buttonArray = isUser ? newPayload.input.text : newPayload.output.options;
+		if (Object.prototype.toString.call( buttonArray ) !== '[object Array]') {
+		  buttonArray = [buttonArray];
+		}
+
+		buttonArray.forEach(function(currentText) {
+		  if (currentText) {
+			var messageJson = {
+			  // <div class='segments'>
+			  'tagName': 'div',
+			  'classNames': ['segments'],
+			  'children': [{
+				// <div class='from-user/from-watson latest'>
+				'tagName': 'div',
+				'classNames': [(isUser ? 'from-user' : 'from-watson'), 'latest', ((messageArray.length === 0) ? 'top' : 'sub')],
+				'children': [{
+				  // <div class='button-inner'>
+                  'tagName': 'div',
+                  'classNames': ['button-inner'],
+                  'children': [{
+				    // <div><button>{messageText}</button></div>
+				    'tagName': 'div',
+				    'text': '<button onclick="buttonAction(\'' + currentText + '\'); removeButtons();">' + currentText + '</button>'
+				  }]
+				}]
+			  }]
+			};
+			messageArray.push(Common.buildDomElement(messageJson));
+		  }
+		});
+	}
 
     return messageArray;
   }
