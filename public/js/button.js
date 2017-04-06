@@ -8,4 +8,6 @@ function removeButtons() {
 	[].forEach.call(document.querySelectorAll('.button-inner'), function (elem) {
 	  elem.parentNode.removeChild(elem);
 	});
+
+	document.getElementById("textInput").focus();
 }

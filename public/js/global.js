@@ -7,4 +7,6 @@
   // Initialize all modules
   ConversationPanel.init();
   PayloadPanel.init();
+  
+  document.getElementById("textInput").focus();
 })();
