@@ -205,11 +205,11 @@ var ConversationPanel = (function() {
 				'tagName': 'div',
 				'classNames': [(isUser ? 'from-user' : 'from-watson'), 'latest', ((messageArray.length === 0) ? 'top' : 'sub')],
 				'children': [{
-				  // <div class='button-inner'>
+				  // <div class='link-inner'>
                   'tagName': 'div',
-                  'classNames': ['button-inner'],
+                  'classNames': ['link-inner'],
                   'children': [{
-				    // <div><button>{messageText}</button></div>
+				    // <div><a>{messageText}</a></div>
 				    'tagName': 'div',
 				    'text': '<a href="' + currentText + '" target="_blank">' + currentText + '</a>'
 				  }]
