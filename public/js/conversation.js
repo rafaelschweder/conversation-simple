@@ -187,6 +187,41 @@ var ConversationPanel = (function() {
       }
     });
 
+	// Code added to include the links from the "options" passes through the "output" of JSON
+	if (!isUser) {
+		var linkArray = isUser ? newPayload.input.links : newPayload.output.links;
+		if (Object.prototype.toString.call( linkArray ) !== '[object Array]') {
+		  linkArray = [linkArray];
+		}
+
+		linkArray.forEach(function(currentText) {
+		  if (currentText) {
+			var messageJson = {
+			  // <div class='segments'>
+			  'tagName': 'div',
+			  'classNames': ['segments'],
+			  'children': [{
+				// <div class='from-user/from-watson latest'>
+				'tagName': 'div',
+				'classNames': [(isUser ? 'from-user' : 'from-watson'), 'latest', ((messageArray.length === 0) ? 'top' : 'sub')],
+				'children': [{
+				  // <div class='button-inner'>
+                  'tagName': 'div',
+                  'classNames': ['button-inner'],
+                  'children': [{
+				    // <div><button>{messageText}</button></div>
+				    'tagName': 'div',
+				    'text': '<a href="' + currentText + '" target="_blank">' + currentText + '</a>'
+				  }]
+				}]
+			  }]
+			};
+			messageArray.push(Common.buildDomElement(messageJson));
+		  }
+		});
+	}
+
+
 	// Code added to include the buttons from the "options" passed through the "output" of JSON
 	if (!isUser) {
 		var buttonArray = isUser ? newPayload.input.text : newPayload.output.options;
