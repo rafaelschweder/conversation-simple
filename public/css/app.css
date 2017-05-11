@@ -15,6 +15,20 @@ div {
   line-height: 1.25rem;
 }
 
+/* Style for links included in the conversation */
+a {
+	color: #9855D4;
+    text-decoration: none;
+    display: inline-block;
+	font-size: 16px;
+	margin-bottom: 8px;
+	margin-left: 25px;
+}
+
+a:hover { 
+    text-decoration: underline;
+}
+
 /* Style for buttons included in the conversation */
 button {
 	background-color: #9855D4;
