@@ -224,7 +224,7 @@ var ConversationPanel = (function() {
 
 	// Code added to include the buttons from the "options" passed through the "output" of JSON
 	if (!isUser) {
-		var buttonArray = isUser ? newPayload.input.text : newPayload.output.options;
+		var buttonArray = isUser ? newPayload.input.options : newPayload.output.options;
 		if (Object.prototype.toString.call( buttonArray ) !== '[object Array]') {
 		  buttonArray = [buttonArray];
 		}
@@ -246,7 +246,7 @@ var ConversationPanel = (function() {
                   'children': [{
 				    // <div><button>{messageText}</button></div>
 				    'tagName': 'div',
-				    'text': '<button onclick="buttonAction(\'' + currentText + '\'); removeButtons();">' + currentText + '</button>'
+				    'text': '<button onclick="buttonAction(\'' + currentText.key + '\'); removeButtons();">' + currentText.value + '</button>'
 				  }]
 				}]
 			  }]
